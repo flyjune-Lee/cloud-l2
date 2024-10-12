@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_ENV: "production"  # 설정 변수 예시
+  APP_LOG_LEVEL: "info"

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: my-app
+spec:
+  replicas: 1  # 원하는 복제본 수
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: my-app-image:latest  # 실제 이미지로 교체
+        ports:
+        - containerPort: 8080  # 애플리케이션의 포트
+        volumeMounts:
+        - name: app-storage
+          mountPath: /app/data  # 컨테이너 내 데이터 저장 경로
+      volumes:
+      - name: app-storage
+        persistentVolumeClaim:
+          claimName: app-pvc  # PVC 이름
